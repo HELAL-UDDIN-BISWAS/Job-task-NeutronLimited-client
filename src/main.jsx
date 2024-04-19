@@ -1,6 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import './index.css'
 import {
   createBrowserRouter,
@@ -14,7 +17,7 @@ import AllContacts from './Page/AllContacts/AllContacts.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root/>,
+    element: <Root />,
     children: [
       {
         path: '/',
@@ -22,18 +25,20 @@ const router = createBrowserRouter([
       },
       {
         path: '/addcontacts',
-        element: <AddContacts/>
+        element: <AddContacts />
       },
       {
         path: '/allcontacts',
-        element: <AllContacts/>
+        element: <AllContacts />
       },
     ]
   },
 ]);
-
+const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-   <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )
