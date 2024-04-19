@@ -44,7 +44,7 @@ const Navber = () => {
                                         isPending ? "pending" : isActive ? "text-orange-400" : ""
                                     }
                                 >
-                                   Add Contacts
+                                   All Contacts
                                 </NavLink>
                             </li>
 
