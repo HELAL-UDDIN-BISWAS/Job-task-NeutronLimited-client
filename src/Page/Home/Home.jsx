@@ -1,12 +1,11 @@
-import { Button } from "keep-react";
+
 
 
 const Home = () => {
     return (
-        <div>
+        <div className="text-2xl">
             Home
-            <h1>kkkkL</h1>
-            <Button size="md">Default</Button>
+           
         </div>
     );
 };

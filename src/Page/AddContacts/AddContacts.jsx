@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form"
 import Swal from "sweetalert2";
 import axios from "axios";
 const AddContacts = () => {
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, formState: { errors }, } = useForm();
+  
      const onSubmit = async (data) => {
         const imageFile = new FormData();
         imageFile.append('image', data.photo[0]);
@@ -18,7 +19,7 @@ const AddContacts = () => {
           
         }
         console.log(userInfo)
-        axios.post('http://localhost:5000/addcontact', userInfo)
+        axios.post('https://jobs-task-server.vercel.app/addcontact', userInfo)
             .then(res => {
                 if (res.data.insertedId) {
                     Swal.fire({
@@ -49,32 +50,38 @@ const AddContacts = () => {
                         <label className='block'>
                             <span>Name</span>
                         </label>
-                        <input type="text" {...register('name')} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Name' required />
+                        <input type="text" {...register('name',{ required: true })} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Name'/>
+                        {errors.name && <p className="text-red-400">Name is required</p>}
+
                     </div>
                     <div className="w-full">
                         <label className='block'>
                             <span>Email</span>
                         </label>
-                        <input type="email" {...register('email')} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Email' required />
+                        <input type="email" {...register('email',{ required: true })} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Email' />
+                        {errors.email && <p className="text-red-400">Email is required</p>}
                     </div>
 
                     <div className="w-full">
                         <label className='block'>
                             <span>Phone Number</span>
                         </label>
-                        <input type="text" {...register('number')} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Number' required />
+                        <input type="number" {...register('number',{ min: 8000})} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Number' required />
+                        {errors.number && <p className="text-red-400">number min 8</p>}
                     </div>
                     <div className="w-full">
                         <label className='block'>
                             <span>Address</span>
                         </label>
-                        <input type="text" {...register('address')} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Adderess' required />
+                        <input type="text" {...register('address',{ required: true })} className="md:w-72 bg-white px-4 py-2 text-lg outline-none border-2 rounded hover:border-gray-600 border-gray-400 duration-200 bg-inherit" placeholder='Inter Your Adderess' />
+                        {errors.address && <p className="text-red-400">Address is required</p>}
                     </div>
                     <div className="w-full">
                         <label className='block'>
                             <span>Photo</span>
                         </label>
-                        <input type="file"  {...register("photo")} className="" required />
+                        <input type="file"  {...register("photo",{ required: true })} className=""  />
+                        {errors.photo && <p className="text-red-400">Image is required</p>}
                     </div>
                 </div>
                 <button className="py-3 bg-primary-500 hover:bg-primary-600 text-white px-5 rounded my-2 w-full">Contacts</button>

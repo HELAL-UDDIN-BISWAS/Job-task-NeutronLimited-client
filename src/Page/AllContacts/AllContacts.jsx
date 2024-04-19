@@ -9,7 +9,7 @@ const AllContacts = () => {
     const {refetch, data:allData } = useQuery({
       queryKey: ['Data'],
       queryFn: () =>
-        fetch('http://localhost:5000/allcontact').then((res) =>
+        fetch('https://jobs-task-server.vercel.app/allcontact').then((res) =>
           res.json(),
         ),
     })

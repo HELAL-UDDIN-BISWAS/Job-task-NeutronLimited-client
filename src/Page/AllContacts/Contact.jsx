@@ -27,7 +27,7 @@ const Contact = ({ alldata, refetch }) => {
     })
       .then((result) => {
         if (result.isConfirmed) {
-          fetch(`http://localhost:5000/deletecontact/${id}`, {
+          fetch(`https://jobs-task-server.vercel.app/deletecontact/${id}`, {
             method: "DELETE",
           })
             .then(data => {
@@ -63,7 +63,7 @@ const onSubmit = async (data) => {
     
   }
   console.log(userInfo)
-  axios.put(`http://localhost:5000/updatecontact/${alldata?._id}`, userInfo)
+  axios.put(`https://jobs-task-server.vercel.app/updatecontact/${alldata?._id}`, userInfo)
       .then(res => {
           if (res.data.insertedId) {
               Swal.fire({
@@ -73,6 +73,7 @@ const onSubmit = async (data) => {
                   footer: '<a href="#">Why do I have this issue?</a>'
               });
           }
+          refetch();
       })
       .catch(error => {
           Swal.fire({
@@ -96,14 +97,14 @@ const onSubmit = async (data) => {
 
   
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-md rounded-lg">
+    <div className="max-w-sm min-w-[280px] mx-auto bg-white shadow-md rounded-lg">
       <img className="w-full  h-[200px]" src={alldata?.image} alt="Person" />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{alldata?.name}</div>
         <p className="text-gray-700 text-base">
-          Email: johndoe@example.com <br></br>
-          Phone: +1234567890 <br></br>
-          Address: 123 Main St, City, Country
+          {alldata?.email} <br></br>
+          Phone: {alldata?.number}<br></br>
+          Address: {alldata?.address}
         </p>
       </div>
       <div className="relative">

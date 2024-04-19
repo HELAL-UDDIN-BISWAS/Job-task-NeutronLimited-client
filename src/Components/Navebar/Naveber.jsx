@@ -1,6 +1,7 @@
 import { Navbar, Button } from "keep-react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
+import image from "../../../public/logo.png"
 const Navber = () => {
 
     return (
@@ -9,7 +10,7 @@ const Navber = () => {
                 <Navbar.Container className="flex items-center justify-between">
                     <Navbar.Container className="flex items-center">
                         <Navbar.Brand>
-                            <img src="" alt="" />
+                            <img src={image} alt="" />
                         </Navbar.Brand>
                         <Navbar.Divider></Navbar.Divider>
                         <Navbar.Container
